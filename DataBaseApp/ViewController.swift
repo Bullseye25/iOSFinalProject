@@ -12,8 +12,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
-    var information: [Data] = []
-    var currentData: Data?
+//    var results: [Result] = []
+    var currentResult: Result?
+    var results = [Result]()
+    
+//    var res = [Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return information.count
+        return results.count
     
     }
     
@@ -36,8 +39,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath) as? DataViewCell
         {
-            cell.load(information[indexPath.row])
-
+            cell.load(results[indexPath.row])
+            
             return cell
         }
         
@@ -50,7 +53,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        currentData = information[indexPath.row]
+        currentResult = results[indexPath.row]
         performSegue(withIdentifier: "detailSegue", sender: self)
     }
     
@@ -58,94 +61,89 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if segue.identifier == "detailSegue" {
             
-//            let detailViewController = segue.destination as? DefaultViewController
+            let detailViewController = segue.destination as? DetailsViewController
             
-//            detailViewController?.weather = currentWeather
+            detailViewController?.result = currentResult
         }
     }
     
     func getContent(){
-
-        print("getContent Called \n")
-
+        
+        print("getContent called")
+//        "https://randomuser.me/api/?seed=raza"
+        
         let url = URL(string:"https://randomuser.me/api/?seed=raza")
-//        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=Paris,fr&APPID=9921e65449f7fc07ad71b16619ae3bc5")
-
-        let task = URLSession.shared.dataTask(with: url!)
-        { (data,response,error) in
-            guard let json =
-                (try?  JSONSerialization.jsonObject(with: data!, options:
-                JSONSerialization.ReadingOptions.mutableContainers)) as? [String:Any]
-                else
-            {
-                print("Not containing JSON\n")
+        let task = URLSession.shared.dataTask(with: url!) { (data,response,error) in
+            guard let json = (try?  JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String:Any] else {
+                print("Not containing JSON")
                 return
             }
-
-            print(json,"\n\n\n\n\n")
-
-//            guard let results = json["results"] as? [String: Any] else
-//            {
-////                    var currentData: Data?
-//                print("Not containing JSON\n")
-//                return
-//            }
+            print(json)
             
-            guard let title = json["title"] as? [String: Any] else
+            guard let result = json["results"] as? String else
             {
-                print(json["title"] as Any)
+                print("Result Not Available")
                 return
             }
             
-//            let title = name["title"] as? [String: Any]
-//
-//            print("title: ",title as? String)
+            let email = result["email"] as? [String: Any]
             
+            print(email)
+        
         }
-//            guard let main = json["main"] as? [String: Any] else
-//            {
-//                return
-//            }
-//
-//            let currentTemp = Int(self.convertTemperature(main["temp"] as? Double ?? 0.0))
-//            let temp_max = Int(self.convertTemperature(main["temp_max"] as? Double ?? 0.0))
-//            let temp_min = Int(self.convertTemperature(main["temp_min"] as? Double ?? 0.0))
-//            let humidity = Int(main["humidity"] as? Double ?? 0.0)
-//            let wind = json["wind"] as? [String: Any]
-//            let windSpeed = Int(wind?["speed"] as? Double ?? 0)
-//            let weather = json["weather"] as? [String: Any]
-//            let desc = weather?["desc"] as? String ?? ""
-//            let image = UIImage(named: "ParisImage")
-//            //            _ = #imageLiteral(resourceName: "ParisImage")
-//
-//
-//            //            guard let windSpeed = wind?["speed"] as? Double else
-//            //            {
-//            //                return
-//            //            }
-//
-//            //            print(cityName, currentTemp, windSpeed)
-//
-//            //            let newWeather = Weather(cityName: cityName, windSpeed: Int(windSpeed), temperature: Int(currentTemp))
-//
-//            let newWeather = Weather(cityName: cityName,
-//                                     windSpeed: Int(windSpeed),
-//                                     temperature: currentTemp,
-//                                     image: image,
-//                                     desc: desc,
-//                                     temp_max: temp_max,
-//                                     temp_min: temp_min,
-//                                     humidity: humidity)
-//
-//            self.weather.append(newWeather)
-//
-//            //            print(json["main"] as? String)
-//
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
+        
         task.resume()
+        
+        
+        
+        
+//        let urlString = "https://randomuser.me/api/?seed=raza"
+//        guard let url = URL(string: urlString)
+//            else
+//        {
+//            print("URL Not Working")
+//            return
+//        }
+//
+//        print(url,"\n\n")
+//
+//        URLSession.shared.dataTask(with: url)
+//        {
+//            (data, _, err) in
+//
+//            DispatchQueue.main.async
+//            {
+//                if let err = err
+//                {
+//                    print("Failed to get data from url:", err)
+//                    return
+//                }
+//
+//                guard let data = data
+//                    else
+//                {
+//                    print("Data Not Available")
+//                    return
+//                }
+//
+////                print(String(data: data, encoding: .utf8), "\n\n")
+//
+//                do
+//                {
+//                    let decoder = JSONDecoder()
+////                    self.currentDatabase = try decoder.decode(Database.self, from: data)
+//                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+//                    self.res = [try decoder.decode(Result.self, from: data)]
+//
+//                    print(self.res[0].email)
+//                }
+//                catch let jsonErr
+//                {
+//                    print("Failed to decode: ", jsonErr)
+//                }
+//            }
+//        }.resume()
+        
     }
 }
 

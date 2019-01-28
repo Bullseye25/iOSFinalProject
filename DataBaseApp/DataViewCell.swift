@@ -21,11 +21,11 @@ class DataViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func load(_ data:Data)
+    func load(_ result:Result)
     {
-        TitleLabel.text = data.title
-        EmailLabel.text = data.email
-        ProfileImage.image = data.largePicture
+        TitleLabel.text = result.id.name
+        EmailLabel.text = result.email
+//        ProfileImage.image = result.picture
     }
     
 }
