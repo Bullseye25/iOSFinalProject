@@ -13,7 +13,7 @@ struct Result: Decodable  {
     let gender: String
     let name: Name
     let location: Location
-    let email: String
+    var email: String?
     let login: Login
     let dob, registered: Dob
     let phone, cell: String
@@ -22,6 +22,7 @@ struct Result: Decodable  {
     let nat: String
     
     init(gender: String, name: Name, location: Location, email: String, login: Login, dob: Dob, registered: Dob, phone: String, cell: String, id: ID, picture: Picture, nat: String) {
+        
         self.gender = gender
         self.name = name
         self.location = location

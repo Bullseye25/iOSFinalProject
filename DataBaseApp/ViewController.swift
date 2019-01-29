@@ -12,11 +12,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
-//    var results: [Result] = []
+    var results: [Result] = []
     var currentResult: Result?
-    var results = [Result]()
-    
-//    var res = [Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,32 +64,128 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+//    var emailArray = [String]()
     func getContent(){
         
         print("getContent called")
 //        "https://randomuser.me/api/?seed=raza"
         
-        let url = URL(string:"https://randomuser.me/api/?seed=raza")
-        let task = URLSession.shared.dataTask(with: url!) { (data,response,error) in
-            guard let json = (try?  JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String:Any] else {
-                print("Not containing JSON")
-                return
-            }
-            print(json)
-            
-            guard let result = json["results"] as? String else
+        var emailArray: String?
+//        var _name: Name?
+        
+        let url = NSURL(string: "https://randomuser.me/api/?seed=raza")
+
+        //fetching the data from the url
+        URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
+
+            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary
             {
-                print("Result Not Available")
-                return
+                //printing the json in console
+                print(jsonObj!.value(forKey: "results")!, "\n\n")
+
+                //getting the results tag array from json and converting it to NSArray
+                if let _results = jsonObj!.value(forKey: "results") as? NSArray
+                {
+                    //looping through all the elements
+                    for res in _results
+                    {
+                        //converting the element to a dictionary
+                        if let resDict = res as? NSDictionary
+                        {
+                            for name in resDict.dictionaryWithValues(forKeys: ["name"])
+                            {
+                                print(name.value, "\n\n")
+                            }
+                            
+                            let n = resDict.mutableSetValue(forKey: "name")
+
+                            print(n, "\n\n")
+
+                            let _name = resDict.value(forKey: "name")
+                            
+                            print(_name, "\n\n")
+                            
+                            
+                            //getting the name from the dictionary
+                            if let email = resDict.value(forKey: "email")
+                            {
+                                //adding the email to the array
+                                emailArray = email as? String
+                                print(emailArray!)
+                            }
+                        }
+                    }
+                }
+
+//                OperationQueue.main.addOperation({
+//                    //calling another function after fetching the json
+//                    //it will show the names to label
+//                    self.showNames()
+//                })
             }
-            
-            let email = result["email"] as? [String: Any]
-            
-            print(email)
+        }).resume()
+
+
+        //works
+//        let url = NSURL(string: "https://randomuser.me/api/?seed=raza")
+//
+//        //fetching the data from the url
+//        URLSession.shared.dataTask(with: (url as? URL)!, completionHandler: {(data, response, error) -> Void in
+//
+//            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+//
+//                //printing the json in console
+//                print(jsonObj!.value(forKey: "results")!)
+//
+//                //getting the results tag array from json and converting it to NSArray
+//                if let _results = jsonObj!.value(forKey: "results") as? NSArray {
+//                    //looping through all the elements
+//                    for res in _results{
+//
+//                        //converting the element to a dictionary
+//                        if let resDict = res as? NSDictionary {
+//
+//                            //getting the name from the dictionary
+//                            if let name = resDict.value(forKey: "email") {
+//
+//                                //adding the email to the array
+//                                self.emailArray.append((name as? String)!)
+//                            }
+//
+//                        }
+//                    }
+//                }
+//
+//                OperationQueue.main.addOperation({
+//                    //calling another function after fetching the json
+//                    //it will show the names to label
+//                    self.showNames()
+//                })
+//            }
+//        }).resume()
+    
+    
+    
         
-        }
-        
-        task.resume()
+//        let url = URL(string:"https://randomuser.me/api/?seed=raza")
+//        let task = URLSession.shared.dataTask(with: url!) { (data,response,error) in
+//            guard let json = (try?  JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [Result] else {
+//                print("Not containing JSON")
+//                return
+//            }
+////            print(json)
+//
+//            guard let result = json as? [Result] else
+//            {
+//                print("Result Not Available")
+//                return
+//            }
+//
+//            print(result as AnyObject)
+//
+//        }
+//
+//        task.resume()
         
         
         
@@ -144,6 +237,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //            }
 //        }.resume()
         
+    }
+    
+    func showNames(){
+        //looing through all the elements of the array
+//        for email in emailArray{
+//
+//            //appending the names to label
+//            //            labelTest.text = labelTest.text! + email + "\n";
+//
+//            print(email);
+//        }
     }
 }
 
