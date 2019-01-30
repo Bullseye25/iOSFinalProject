@@ -31,10 +31,10 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _title.text = result?.name.title
-        _firstName.text = result?.name.first
-        _lastName.text = result?.name.last
-        _street.text = result?.location.street
+        _title.text = result?.name!.title
+        _firstName.text = result?.name!.first
+        _lastName.text = result?.name!.last
+        _street.text = result?.location!.street
         _email.text = result?.email
         _phone.text = result?.phone
         _cell.text = result?.cell

@@ -16,16 +16,17 @@ class DataViewCell: UITableViewCell {
     
     @IBOutlet weak var ProfileImage: UIImageView!
     
+    var Picture: String?
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
     }
     
-    func load(_ result:Result)
+    func load(_ result:Result, _ index: Int)
     {
-        TitleLabel.text = result.id.name
-        EmailLabel.text = result.email
-//        ProfileImage.image = result.picture
+        TitleLabel.text = result.name!.title
+        Picture = result.picture?.thumbnail
     }
     
 }

@@ -9,11 +9,7 @@
 import Foundation
 
 struct Dob: Decodable  {
-    let date: Date
-    let age: Int
-    
-    init(date: Date, age: Int) {
-        self.date = date
-        self.age = age
-    }
+    let date: String?
+    let age: Int?
+
 }

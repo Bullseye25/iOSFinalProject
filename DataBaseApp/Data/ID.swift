@@ -9,10 +9,5 @@
 import Foundation
 
 struct ID: Decodable  {
-    let name, value: String
-    
-    init(name: String, value: String) {
-        self.name = name
-        self.value = value
-    }
+    let name, value: String?
 }

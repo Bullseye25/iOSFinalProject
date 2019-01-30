@@ -10,30 +10,15 @@ import Foundation
 
 struct Result: Decodable  {
     
-    let gender: String
-    let name: Name
-    let location: Location
+    let gender: String?
+    let name: Name?
+    let location: Location?
     var email: String?
-    let login: Login
-    let dob, registered: Dob
-    let phone, cell: String
-    let id: ID
-    let picture: Picture
-    let nat: String
-    
-    init(gender: String, name: Name, location: Location, email: String, login: Login, dob: Dob, registered: Dob, phone: String, cell: String, id: ID, picture: Picture, nat: String) {
-        
-        self.gender = gender
-        self.name = name
-        self.location = location
-        self.email = email
-        self.login = login
-        self.dob = dob
-        self.registered = registered
-        self.phone = phone
-        self.cell = cell
-        self.id = id
-        self.picture = picture
-        self.nat = nat
-    }
+    let login: Login?
+    let dob, registered: Dob?
+    let phone, cell: String?
+    let id: ID?
+    let picture: Picture?
+    let nat: String?
+ 
 }

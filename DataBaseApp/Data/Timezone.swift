@@ -9,10 +9,7 @@
 import Foundation
 
 struct Timezone: Decodable  {
-    let offset, description: String
+    let offset: String?
+    let description: String?
     
-    init(offset: String, description: String) {
-        self.offset = offset
-        self.description = description
-    }
 }

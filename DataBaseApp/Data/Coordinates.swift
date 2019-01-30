@@ -9,10 +9,5 @@
 import Foundation
 
 struct Coordinates: Decodable  {
-    let latitude, longitude: String
-    
-    init(latitude: String, longitude: String) {
-        self.latitude = latitude
-        self.longitude = longitude
-    }
+    let latitude, longitude: String?
 }

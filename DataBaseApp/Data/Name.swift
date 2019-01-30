@@ -9,11 +9,6 @@
 import Foundation
 
 struct Name: Decodable  {
-    let title, first, last: String
+    let title, first, last: String?
     
-    init(title: String, first: String, last: String) {
-        self.title = title
-        self.first = first
-        self.last = last
-    }
 }

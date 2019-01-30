@@ -50,11 +50,6 @@ import Foundation
 //}
 
 struct Database: Decodable {
-    let results: [Result]
-    let info: Info
-    
-    init(results: [Result], info: Info) {
-        self.results = results
-        self.info = info
-    }
+    let results: [Result]?
+    let info: Info?
 }

@@ -9,17 +9,9 @@
 import Foundation
 
 struct Location: Decodable  {
-    let street, city, state: String
-    let postcode: Int
-    let coordinates: Coordinates
-    let timezone: Timezone
+    let street, city, state: String?
+    let postcode: Int?
+    let coordinates: Coordinates?
+    let timezone: Timezone?
     
-    init(street: String, city: String, state: String, postcode: Int, coordinates: Coordinates, timezone: Timezone) {
-        self.street = street
-        self.city = city
-        self.state = state
-        self.postcode = postcode
-        self.coordinates = coordinates
-        self.timezone = timezone
-    }
 }
