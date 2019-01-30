@@ -82,7 +82,7 @@
                     <navigationItem key="navigationItem" id="Oab-AQ-qLU"/>
                     <connections>
                         <outlet property="tableView" destination="8fe-gS-HJ6" id="zNa-X0-exx"/>
-                        <segue destination="URb-nX-l75" kind="show" id="UeZ-e4-Tul"/>
+                        <segue destination="URb-nX-l75" kind="show" identifier="detailSegue" id="UeZ-e4-Tul"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
