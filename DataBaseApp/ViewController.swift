@@ -8,26 +8,24 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+{
     @IBOutlet weak var tableView: UITableView!
     
-    var result: [Result] = []
+    var results: [Result] = []
     var currentResult: Result?
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         getContent()
-//        self.tableView.delegate = self
-//        self.tableView.dataSource = self
-        
     }
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return result.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return results.count
     
     }
     
@@ -36,7 +34,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath) as? DataViewCell
         {
-            cell.load(result[indexPath.row], indexPath.row)
+            cell.load(results[indexPath.row])
+            
+            if isEven(row: indexPath.row)
+            {
+                cell.backgroundColor = UIColor.blue.withAlphaComponent(0.1)
+            }
+            else
+            {
+                cell.backgroundColor = UIColor.blue.withAlphaComponent(0.4)
+            }
+            
+            let img = cell.ProfileImage
+            
+            img!.layer.cornerRadius = img!.frame.size.width/2
             
             return cell
         }
@@ -44,20 +55,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         return 40
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        currentResult = result[indexPath.row]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        currentResult = results[indexPath.row]
         performSegue(withIdentifier: "detailSegue", sender: self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "detailSegue" {
-            
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "detailSegue"
+        {
             let detailViewController = segue.destination as? DetailsViewController
             
             detailViewController?.result = currentResult
@@ -65,28 +77,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func getContent(){
-        
-        print("getContent called")
-//        "https://randomuser.me/api/?seed=raza"
      
-        let jsonUrlString = "https://randomuser.me/api/?seed=raza"
+        let jsonUrlString = "https://randomuser.me/api/?results=18&seed=raza"
         
         guard let url = URL(string: jsonUrlString) else { return }
         
         URLSession.shared.dataTask(with: url){ (data, response, err) in
             
-            guard let data = data else {
+            guard let data = data else
+            {
                 print("Data not available")
                 return
-                
             }
             
-            do{
+            do
+            {
                 let database = try JSONDecoder().decode(Database.self, from: data)
                 
-                self.result.append(database.results![0])
+                for res in database.results!
+                {
+                     self.results.append(res)
+                }
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async
+                {
                     self.tableView.reloadData()
                 }
             }
@@ -94,7 +108,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 print("Unable to get the data \n\n", jsonErr)
             }
+            
         }.resume()
         
+    }
+    
+    func isEven(row: Int) -> Bool
+    {
+        return row % 2 == 0
     }
 }

@@ -8,7 +8,8 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UIViewController
+{
     
     var result: Result?
     
@@ -28,19 +29,19 @@ class DetailsViewController: UIViewController {
     
     @IBOutlet weak var _cell: UILabel!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         _title.text = result?.name!.title
         _firstName.text = result?.name!.first
         _lastName.text = result?.name!.last
-        _street.text = result?.location!.street
+        _street.text = result?.location?.street
         _email.text = result?.email
         _phone.text = result?.phone
         _cell.text = result?.cell
-        
-//        self.view.backgroundColor = UIColor(red: 198/255, green: 172/255, blue: 143/255, alpha: 0.1)
-        
+        let url = URL(string: (result!.picture?.large)!)
+        userPicture.image = result?.picture?.getImg(url: url!)
     }
 }
 
