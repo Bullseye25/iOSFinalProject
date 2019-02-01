@@ -8,11 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class ViewController: UIViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     var results: [Result] = []
+    var filteredResults = [Result]()
     var currentResult: Result?
     
     override func viewDidLoad()
@@ -20,46 +23,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         getContent()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return results.count
-    }
-    
-    //Builds the cell inside the table view
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath) as? DataViewCell
-        {
-            cell.load(results[indexPath.row])
-            cell.backgroundColor = cell.getColor(row: indexPath.row)
-            
-            return cell
-        }
         
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        return 40
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        currentResult = results[indexPath.row]
-        performSegue(withIdentifier: "detailSegue", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if segue.identifier == "detailSegue"
-        {
-            let detailViewController = segue.destination as? DetailsViewController
-            
-            detailViewController?.result = currentResult
-        }
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Data"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     func getContent()
@@ -68,7 +38,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         guard let url = URL(string: jsonUrlString) else
         {
-            print("Unable to get the Json Data")
+            print("\n\n Unable to get the Json Data \n\n")
+            self.displayMessage(message: "It Seems The Data Is Not Available")
             return
         }
         
@@ -76,7 +47,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             guard let data = data else
             {
-                print("Data not available")
+                print("\n\n Not Connected To Internet \n\n")
+                self.displayMessage(message: "Please Check Your Internet Connection")
                 return
             }
             
@@ -96,9 +68,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             catch let jsonErr
             {
-                print("Unable to get the data \n\n", jsonErr)
+                print("\n\n Unable to get the data \n\n", jsonErr)
+                self.displayMessage(message: "Unable To Get The Data, Please Try to Reset The App")
             }
             
         }.resume()
+        
+        displayMessage(message: "Please Slide Down To Use The Search Bar")
+    }
+    
+    func displayMessage(message: String)
+    {
+        let mes = UIAlertController(title: "Notification", message: message, preferredStyle: UIAlertController.Style.alert)
+        mes.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(mes, animated: true, completion: nil)
     }
 }

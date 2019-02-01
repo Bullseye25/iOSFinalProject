@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8fe-gS-HJ6">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8fe-gS-HJ6">
                                 <rect key="frame" x="16" y="64" width="343" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dataCell" id="VOr-Sv-wB8" customClass="DataViewCell" customModule="DataBaseApp" customModuleProvider="target">
@@ -77,6 +76,15 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="8fe-gS-HJ6" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4Es-fe-zKJ"/>
+                            <constraint firstItem="8fe-gS-HJ6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FLW-hE-JIH"/>
+                            <constraint firstItem="8fe-gS-HJ6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Hsr-00-Lmt"/>
+                            <constraint firstItem="8fe-gS-HJ6" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="LpV-mL-hZ3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8fe-gS-HJ6" secondAttribute="trailing" constant="16" id="eeu-lM-6ei"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8fe-gS-HJ6" secondAttribute="trailing" constant="16" id="gRN-lH-I3H"/>
+                            <constraint firstItem="8fe-gS-HJ6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wwQ-X5-Ysa"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Oab-AQ-qLU"/>
