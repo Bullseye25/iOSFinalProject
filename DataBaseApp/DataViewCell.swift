@@ -10,7 +10,6 @@ import UIKit
 
 class DataViewCell: UITableViewCell
 {
-
     @IBOutlet weak var _profilePicture: UIImageView!
     
     @IBOutlet weak var _name: UILabel!

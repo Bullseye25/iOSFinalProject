@@ -45,7 +45,6 @@ class DetailsViewController: UIViewController
         _cell.text = "Cell: "+" "+(result?.cell)!
         let url = URL(string: (result!.picture?.large)!)
         _userPicture.image = result?.picture?.getImg(url: url!)
-        _userPicture.frame.size.height = _background.frame.size.height/8
         _background.backgroundColor = UIColor(displayP3Red: 234/255, green: 224/255, blue: 213/255, alpha: 0.1)
         
     }

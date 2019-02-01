@@ -100,6 +100,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
         }.resume()
-        
     }
 }
