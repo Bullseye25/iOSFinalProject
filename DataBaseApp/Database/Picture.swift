@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-struct Picture: Decodable  {
-    
+struct Picture: Decodable
+{    
     let large, medium, thumbnail: String?
     
     func getImg(url: URL) -> UIImage

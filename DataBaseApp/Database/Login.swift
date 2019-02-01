@@ -1,5 +1,5 @@
 //
-//  Dob.swift
+//  Login.swift
 //  DataBaseApp
 //
 //  Created by Ammad Raza on 1/27/19.
@@ -8,8 +8,9 @@
 
 import Foundation
 
-struct Dob: Decodable  {
-    let date: String?
-    let age: Int?
-
+struct Login: Decodable
+{
+    let uuid, username, password, salt: String?
+    let md5, sha1, sha256: String?
+    
 }

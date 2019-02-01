@@ -1,5 +1,5 @@
 //
-//  Login.swift
+//  Coordinates.swift
 //  DataBaseApp
 //
 //  Created by Ammad Raza on 1/27/19.
@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct Login: Decodable  {
-    let uuid, username, password, salt: String?
-    let md5, sha1, sha256: String?
-    
+struct Coordinates: Decodable
+{
+    let latitude, longitude: String?
 }

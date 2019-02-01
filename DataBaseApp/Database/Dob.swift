@@ -1,5 +1,5 @@
 //
-//  Name.swift
+//  Dob.swift
 //  DataBaseApp
 //
 //  Created by Ammad Raza on 1/27/19.
@@ -8,7 +8,9 @@
 
 import Foundation
 
-struct Name: Decodable  {
-    let title, first, last: String?
-    
+struct Dob: Decodable
+{
+    let date: String?
+    let age: Int?
+
 }

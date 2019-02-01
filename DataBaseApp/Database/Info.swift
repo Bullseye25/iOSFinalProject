@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Info: Decodable  {
+struct Info: Decodable
+{
     let seed: String?
     let results, page: Int?
     let version: String?

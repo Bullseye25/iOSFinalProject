@@ -22,11 +22,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         getContent()
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return results.count
-    
     }
     
     //Builds the cell inside the table view
@@ -35,19 +33,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath) as? DataViewCell
         {
             cell.load(results[indexPath.row])
-            
-            if isEven(row: indexPath.row)
-            {
-                cell.backgroundColor = UIColor.blue.withAlphaComponent(0.1)
-            }
-            else
-            {
-                cell.backgroundColor = UIColor.blue.withAlphaComponent(0.4)
-            }
-            
-            let img = cell.ProfileImage
-            
-            img!.layer.cornerRadius = img!.frame.size.width/2
+            cell.backgroundColor = cell.getColor(row: indexPath.row)
             
             return cell
         }
@@ -76,11 +62,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func getContent(){
-     
-        let jsonUrlString = "https://randomuser.me/api/?results=18&seed=raza"
+    func getContent()
+    {
+        let jsonUrlString = "https://randomuser.me/api/?results=40&seed=raza"
         
-        guard let url = URL(string: jsonUrlString) else { return }
+        guard let url = URL(string: jsonUrlString) else
+        {
+            print("Unable to get the Json Data")
+            return
+        }
         
         URLSession.shared.dataTask(with: url){ (data, response, err) in
             
@@ -111,10 +101,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         }.resume()
         
-    }
-    
-    func isEven(row: Int) -> Bool
-    {
-        return row % 2 == 0
     }
 }

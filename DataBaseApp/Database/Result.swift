@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct Result: Decodable  {
-    
+struct Result: Decodable
+{    
     let gender: String?
     let name: Name?
     let location: Location?

@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Timezone: Decodable  {
+struct Timezone: Decodable
+{
     let offset: String?
     let description: String?
     

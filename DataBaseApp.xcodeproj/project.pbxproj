@@ -61,7 +61,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6B0035AF21FDC7440091B640 /* Data */ = {
+		6B0035AF21FDC7440091B640 /* Database */ = {
 			isa = PBXGroup;
 			children = (
 				6B3ED8CE21F51F28001F6919 /* Database.swift */,
@@ -76,7 +76,7 @@
 				6B0035A921FDBE040091B640 /* Name.swift */,
 				6B0035AB21FDBE1A0091B640 /* Picture.swift */,
 			);
-			path = Data;
+			path = Database;
 			sourceTree = "<group>";
 		};
 		6B3ED8AE21F4CB18001F6919 = {
@@ -98,7 +98,7 @@
 		6B3ED8B921F4CB18001F6919 /* DataBaseApp */ = {
 			isa = PBXGroup;
 			children = (
-				6B0035AF21FDC7440091B640 /* Data */,
+				6B0035AF21FDC7440091B640 /* Database */,
 				6B3ED8BA21F4CB18001F6919 /* AppDelegate.swift */,
 				6B3ED8BC21F4CB18001F6919 /* ViewController.swift */,
 				6B3ED8BE21F4CB18001F6919 /* Main.storyboard */,

@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Location: Decodable  {
+struct Location: Decodable
+{
     let street, city, state: String?
 //    let postcode: nil
     let coordinates: Coordinates?

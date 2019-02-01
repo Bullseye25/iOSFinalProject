@@ -1,5 +1,5 @@
 //
-//  Coordinates.swift
+//  Name.swift
 //  DataBaseApp
 //
 //  Created by Ammad Raza on 1/27/19.
@@ -8,6 +8,8 @@
 
 import Foundation
 
-struct Coordinates: Decodable  {
-    let latitude, longitude: String?
+struct Name: Decodable
+{
+    let title, first, last: String?
+    
 }

@@ -8,13 +8,14 @@
 
 import UIKit
 
-class DataViewCell: UITableViewCell {
+class DataViewCell: UITableViewCell
+{
+
+    @IBOutlet weak var _profilePicture: UIImageView!
     
-    @IBOutlet weak var TitleLabel: UILabel!
+    @IBOutlet weak var _name: UILabel!
     
-    @IBOutlet weak var EmailLabel: UILabel!
-    
-    @IBOutlet weak var ProfileImage: UIImageView!
+    @IBOutlet weak var _email: UILabel!
     
     override func awakeFromNib()
     {
@@ -23,11 +24,37 @@ class DataViewCell: UITableViewCell {
     
     func load(_ result:Result)
     {
-        TitleLabel.text = result.name!.title
-        EmailLabel.text = result.email
+        _name.text = (result.name!.first?.uppercased())!+" "+((result.name?.last)?.uppercased())!
+        _email.text = result.email
         let url = URL(string: (result.picture?.thumbnail)!)
-        ProfileImage.image = result.picture?.getImg(url: url!)
+        _profilePicture.image = result.picture?.getImg(url: url!)
         
+        imgBorderControl()
+    }
+    
+    func imgBorderControl()
+    {
+        let img = _profilePicture
+        img!.layer.cornerRadius = img!.frame.size.width/2
+        img!.clipsToBounds = true
+    }
+    
+    func getColor(row: Int) -> UIColor
+    {
+        var red: CGFloat?
+        var green: CGFloat?
+        var blue: CGFloat?
+        
+        red = 234/255
+        green = 224/255
+        blue = 213/255
+        
+        if row % 2 == 0
+        {
+            return UIColor(displayP3Red: red!, green: green!, blue: blue!, alpha: 0.1)
+        }
+        
+        return UIColor(displayP3Red: red!, green: green!, blue: blue!, alpha: 0.4)
     }
     
 }

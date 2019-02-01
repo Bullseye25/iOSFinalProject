@@ -8,12 +8,13 @@
 
 import UIKit
 
+import SpriteKit
+
 class DetailsViewController: UIViewController
 {
-    
     var result: Result?
     
-    @IBOutlet weak var userPicture: UIImageView!
+    @IBOutlet weak var _userPicture: UIImageView!
     
     @IBOutlet weak var _title: UILabel!
     
@@ -29,19 +30,24 @@ class DetailsViewController: UIViewController
     
     @IBOutlet weak var _cell: UILabel!
     
+    @IBOutlet weak var _background: UIView!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        _title.text = result?.name!.title
-        _firstName.text = result?.name!.first
-        _lastName.text = result?.name!.last
-        _street.text = result?.location?.street
-        _email.text = result?.email
-        _phone.text = result?.phone
-        _cell.text = result?.cell
+        _title.text = "Title: "+" "+(result?.name!.title!.uppercased())!
+        _firstName.text = "First Name: "+" "+(result?.name!.first!.uppercased())!
+        _lastName.text = "Lase Name: "+" "+(result?.name!.last!.uppercased())!
+        _street.text = "Street: "+" "+(result?.location?.street)!
+        _email.text = "Email: "+" "+(result?.email)!
+        _phone.text = "Phone: "+" "+(result?.phone)!
+        _cell.text = "Cell: "+" "+(result?.cell)!
         let url = URL(string: (result!.picture?.large)!)
-        userPicture.image = result?.picture?.getImg(url: url!)
+        _userPicture.image = result?.picture?.getImg(url: url!)
+        _userPicture.frame.size.height = _background.frame.size.height/8
+        _background.backgroundColor = UIColor(displayP3Red: 234/255, green: 224/255, blue: 213/255, alpha: 0.1)
+        
     }
 }
 
